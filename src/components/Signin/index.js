@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../reducers/sign";
@@ -12,11 +12,10 @@ function Signin() {
 
   const state = useSelector((state) => {
     return {
-      sign: state.sign,
+      sign: state.sign.token,
     };
   });
-  // console.log(state.sign);
-
+  console.log(state.sign);
 
   const signin = async () => {
     try {
@@ -31,7 +30,6 @@ function Signin() {
       };
       dispatch(login(data));
       // console.log(data);
-      
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +37,7 @@ function Signin() {
 
   return (
     <>
-      {!state.sign.token ? (
+      {!state.sign ? (
         <>
           <input
             type="email"

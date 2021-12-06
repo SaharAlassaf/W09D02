@@ -1,39 +1,37 @@
 const initState = {
-    tasks: [],
+  userTask: [],
+  adminTask: []
+};
+
+const tasks = (state = initState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "USER_TASKS":
+      const { userTask } = payload;
+      return { userTask };
+
+    case "ADMIN_TASKS":
+      const { adminTask } = payload;
+      return { adminTask };
+
+    default:
+      return state;
+  }
+};
+
+export default tasks;
+
+export const userTasks = (data) => {
+  return {
+    type: "USER_TASKS",
+    payload: data,
   };
-  
-  const tasks = (state = initState, action) => {
-    const { type, payload } = action;
-  
-    switch (type) {
-      case "LOGIN":
-        const { role, token } = payload;
-        localStorage.setItem("token", token);
-        return { role, token };
-  
-      case "LOGOUT":
-        localStorage.clear();
-        return payload;
-        
-      default:
-        return state;
-    }
+};
+
+export const adminTasks = (data) => {
+  return {
+    type: "ADMIN_TASKS",
+    payload: data,
   };
-  
-  export default tasks;
-  
-  export const login = (data) => {
-    console.log("here");
-    return {
-      type: "LOGIN",
-      payload: data,
-    };
-  };
-  
-  export const logout = (data) => {
-    return {
-      type: "LOGOUT",
-      payload: data,
-    };
-  };
-  
+};

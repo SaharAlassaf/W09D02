@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Landing from "../Landing";
 import Task from "../Task";
 import { logout } from "../../reducers/sign";
+import { userTasks } from "../../reducers/tasks";
 import axios from "axios";
 
 function Tasks() {
   const dispatch = useDispatch();
-  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     getTasks();
@@ -17,6 +17,7 @@ function Tasks() {
   const state = useSelector((state) => {
     return {
       sign: state.sign,
+      tasks: state.tasks.userTask,
     };
   });
 
@@ -44,7 +45,8 @@ function Tasks() {
         headers: { Authorization: `Bearer ${state.sign.token}` },
       });
       // console.log(res.data);
-      setTasks(res.data);
+      dispatch(userTasks({userTask: res.data}));
+      // setTasks(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +104,7 @@ function Tasks() {
             <input type="submit" value="Add" />
           </form>
           <ul>
-            {tasks.map((item) => (
+            {state.tasks.map((item) => (
               <Task
                 key={item._id}
                 userItem={item}

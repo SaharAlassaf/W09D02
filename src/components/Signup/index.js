@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../reducers/sign";
 import axios from "axios";
 
 function Signup() {
-
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -23,8 +22,8 @@ function Signup() {
         email,
         password,
       });
-       // console.log(res.data);
-       const data = {
+      // console.log(res.data);
+      const data = {
         role: res.data.result.role.role,
         token: res.data.token,
       };
