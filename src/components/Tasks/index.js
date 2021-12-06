@@ -39,7 +39,6 @@ function Tasks() {
   };
 
   const getTasks = async () => {
-
     try {
       const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/`, {
         headers: { Authorization: `Bearer ${state.sign.token}` },
@@ -62,7 +61,7 @@ function Tasks() {
           headers: { Authorization: `Bearer ${state.sign.token}` },
         }
       );
-      console.log(res.data);
+      // console.log(res.data);
       getTasks();
     } catch (error) {
       console.log(error);
@@ -71,14 +70,14 @@ function Tasks() {
 
   const deleteTask = async (id) => {
     try {
-      console.log(id);
+      // console.log(id);
       const res = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/deleteTask/${id}`,
         {
           headers: { Authorization: `Bearer ${state.sign.token}` },
         }
       );
-      console.log(res.data);
+      // console.log(res.data);
       getTasks();
     } catch (error) {
       console.log(error);

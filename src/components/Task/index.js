@@ -13,7 +13,7 @@ function Task({ admin, item, deleteTasks, userItem, deleteTask, updateTask }) {
 
   return (
     <>
-      {state.sign.user === "admin" ? (
+      {state.sign.role === "admin" ? (
         <>
           <li key={item._id}>
             {item.name}
@@ -30,7 +30,7 @@ function Task({ admin, item, deleteTasks, userItem, deleteTask, updateTask }) {
                 setUpdate(false);
               }}
             >
-              <input type="text" name="newTaskVal"/>
+              <input type="text" name="newTaskVal" />
 
               <input type="submit" value="Done" />
             </form>

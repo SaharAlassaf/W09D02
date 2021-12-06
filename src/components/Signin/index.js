@@ -26,7 +26,7 @@ function Signin() {
       });
       // console.log(res.data);
       const data = {
-        user: res.data.result.role.role,
+        role: res.data.result.role.role,
         token: res.data.token,
       };
       dispatch(login(data));
@@ -55,7 +55,7 @@ function Signin() {
         </>
       ) : (
         <>
-          {state.sign.user === "admin" ? (
+          {state.sign.role === "admin" ? (
             <Link to="/Dashboard">
               <buttoun>Dashboard</buttoun>
             </Link>

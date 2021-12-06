@@ -1,5 +1,5 @@
 const initState = {
-  user: "",
+  role: "",
   token: "",
 };
 
@@ -9,9 +9,9 @@ const sign = (state = initState, action) => {
   switch (type) {
     case "LOGIN":
       console.log("here");
-      const { user, token } = payload;
+      const { role, token } = payload;
       localStorage.setItem("token", token);
-      return { user, token };
+      return { role, token };
 
     case "LOGOUT":
       localStorage.clear();
