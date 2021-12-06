@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../reducers/sign";
 import Landing from "../Landing";
 import Task from "../Task";
 import axios from "axios";
 
 function Dashboard() {
+  const dispatch = useDispatch();
   const [tasks, setTasks] = useState([]);
-  const [token, setToken] = useState("");
-  const [admin, setAdmin] = useState("");
 
   useEffect(() => {
     getTasks();
   }, []);
 
+
+  const state = useSelector((state) => {
+    return {
+      sign: state.sign,
+    };
+  });
+
   const getTasks = async () => {
-    const storage = localStorage.getItem("token");
-    setToken(storage);
-    const isAdmin = localStorage.getItem("admin");
-    setAdmin(isAdmin);
 
     try {
       const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/tasks`, {
-        headers: { Authorization: `Bearer ${storage}` },
+        headers: { Authorization: `Bearer ${state.sign.token}` },
       });
       console.log(res.data);
       setTasks(res.data);
@@ -37,7 +41,7 @@ function Dashboard() {
       const res = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/delatedTasks/${id}`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${state.sign.token}` },
         }
       );
       console.log(res.data);
@@ -47,26 +51,25 @@ function Dashboard() {
     }
   };
 
-  const logout = () => {
-    localStorage.clear();
-  }
+  const logOut = () => {
+    dispatch(logout({ user: "", token: "" }));
+  };
 
   return (
     <>
-      {token ? (
+      {state.sign.token ? (
         <>
           <ul>
             {tasks.map((item) => (
               <Task
                 key={item._id}
                 item={item}
-                admin={admin}
                 deleteTasks={deleteTasks}
               />
             ))}
           </ul>
           <Link to="/">
-          <button onClick={logout}>log out</button>
+          <button onClick={logOut}>log out</button>
           </Link>
         </>
       ) : (

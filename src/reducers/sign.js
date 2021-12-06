@@ -8,7 +8,6 @@ const sign = (state = initState, action) => {
 
   switch (type) {
     case "LOGIN":
-      console.log("here");
       const { role, token } = payload;
       localStorage.setItem("token", token);
       return { role, token };
@@ -25,7 +24,6 @@ const sign = (state = initState, action) => {
 export default sign;
 
 export const login = (data) => {
-  console.log("here");
   return {
     type: "LOGIN",
     payload: data,

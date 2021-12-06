@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import sign from "./sign";
-import task from "./task";
+import tasks from "./tasks";
 
-const reducers = combineReducers({ sign });
+const reducers = combineReducers({ sign, tasks });
 
 const store = () => {
   return createStore(reducers, composeWithDevTools());

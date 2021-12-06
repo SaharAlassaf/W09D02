@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-function Task({ admin, item, deleteTasks, userItem, deleteTask, updateTask }) {
+function Task({ item, deleteTasks, userItem, deleteTask, updateTask }) {
   const [update, setUpdate] = useState(false);
 
   const state = useSelector((state) => {
